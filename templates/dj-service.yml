@@ -63,13 +63,12 @@ objects:
         uri: ${SOURCE_REPOSITORY_URL}
       type: Git
     strategy:
-      sourceStrategy:
-        env:
+      type: Docker
+      dockerStrategy: 
         from:
           kind: ImageStreamTag
           name: python:3.5
           namespace: ${NAMESPACE}
-      type: Docker
     triggers:
     - type: ImageChange
     - type: ConfigChange
