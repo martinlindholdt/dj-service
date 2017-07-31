@@ -1,0 +1,28 @@
+
+
+1. create, build, deploy new service 
+
+
+oc rollout dj-service -n dj-service 
+
+
+2. create, build, deploy client 
+
+
+Visual 
+- metrics? 
+
+
+Feecback 
+- running service = light on 
+- unstable service = light 2 
+- crash = light 3 
+
+
+3. scale up 
+
+4. make unstable 
+
+5. crash app 
+
+
