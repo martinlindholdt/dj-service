@@ -97,7 +97,7 @@ objects:
         - env:
           - name: APPLICATION_DOMAIN
             value: ${APPLICATION_DOMAIN}
-          image: ' '
+          image: 172.30.62.219:5000/${PROJECT_NAME}/${NAME}:latest
           livenessProbe:
             httpGet:
               path: /health
@@ -132,6 +132,11 @@ parameters:
   name: NAME
   required: true
   value: dj-service
+
+- description: The name of this project 
+  displayName: Project Name 
+  name: PROJECT_NAME
+  value: dj-sandbox
 - description: The OpenShift Namespace where the ImageStream resides.
   displayName: Namespace
   name: NAMESPACE
@@ -146,8 +151,9 @@ parameters:
   displayName: Git Repository URL
   name: SOURCE_REPOSITORY_URL
   required: true
-  #value: https://m29716@bitbucket.tdc.dk/scm/liq/dj-service.git
-  value: git@github.com:martinlindholdt/dj-service.git
+  #value: ssh://git@10.74.139.97:7999/liq/dj-service.git 
+  value: https://m29716@bitbucket.tdc.dk/scm/liq/dj-service.git
+  #value: git@github.com:martinlindholdt/dj-service.git
 
 - description: Set this to a branch name, tag or other ref of your repository if you
     are not using the default branch.

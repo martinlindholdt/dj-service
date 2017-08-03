@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftWebConsole
+  creationTimestamp: null
+  generation: 1
+  labels:
+    app: onboarding-bpm-process
+  name: onboarding-bpm-process
+spec:
+  replicas: 1
+  selector:
+    app: onboarding-bpm-process
+    deploymentconfig: onboarding-bpm-process
+  strategy:
+    activeDeadlineSeconds: 21600
+    resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftWebConsole
+      creationTimestamp: null
+      labels:
+        app: onboarding-bpm-process
+        deploymentconfig: onboarding-bpm-process
+    spec:
+      containers:
+      - env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: test
+        image: 172.30.62.219:5000/onboarding-dev/onboarding-bpm-process@sha256:fd58de0d44b5ede13c1e1be5aa6f55f55aef25ba4e9c76223c3f13a254cbb784
+        imagePullPolicy: Always
+        name: onboarding-bpm-process
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 8443
+          protocol: TCP
+        - containerPort: 8778
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - onboarding-bpm-process
+      from:
+        kind: ImageStreamTag
+        name: onboarding-bpm-process:latest
+        namespace: onboarding-dev
+    type: ImageChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0
