@@ -118,7 +118,7 @@ objects:
               memory: ${MEMORY_LIMIT}
     triggers:
     - imageChangeParams:
-        automatic: false
+        automatic: true
         containerNames:
         - dj-service
         from:
